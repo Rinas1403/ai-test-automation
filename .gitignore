@@ -1,0 +1,29 @@
+# Test output — gom hết trong reports/
+reports/
+
+# Thư mục mặc định của tool (phòng khi config bị bỏ sót)
+allure-results/
+allure-report/
+test-results/
+playwright-report/
+blob-report/
+
+# Dependencies
+node_modules/
+
+# Credentials — chỉ commit .env.example
+.env
+.env.*
+!.env.example
+
+# Playwright MCP — snapshot/ảnh recon chụp hệ thống thật
+.playwright-mcp/
+
+# Claude — permission tích luỹ theo máy
+.claude/settings.local.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
