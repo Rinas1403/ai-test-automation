@@ -1,0 +1,68 @@
+name: Playwright UI + API Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: 'Project cần chạy: all | ui | api'
+        required: false
+        default: all
+
+env:
+  # Số luồng song song — runner GitHub-hosted chỉ 2 vCPU, hạ xuống 2–3 nếu chạy chập chờn.
+  # Sửa đúng dòng này, KHÔNG đụng playwright.config.ts
+  WORKERS: 5
+  HEADLESS: 'true'
+  # Tài khoản test tự sinh trong fixture → không cần secret đăng nhập
+  BASE_URL: ${{ vars.BASE_URL || 'https://book.anhtester.com' }}
+  API_BASE_URL: ${{ vars.API_BASE_URL || 'https://book.anhtester.com' }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # Allure 2 CLI (allure-commandline) chạy trên JVM
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Run tests
+        env:
+          PROJECT: ${{ inputs.project }}
+        run: |
+          if [ "$PROJECT" = "ui" ] || [ "$PROJECT" = "api" ]; then
+            npx playwright test --project="$PROJECT"
+          else
+            npx playwright test
+          fi
+
+      - name: Sinh Allure report (CLI trong project)
+        if: always()
+        run: |
+          npm run report:generate
+          npm run report:single
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-reports
+          path: reports/
+          retention-days: 14

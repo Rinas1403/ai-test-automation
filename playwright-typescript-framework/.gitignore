@@ -1,0 +1,15 @@
+# Test output — gom hết trong reports/
+reports/
+
+# Thư mục mặc định của tool (phòng khi config bị bỏ sót)
+allure-results/
+allure-report/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Dependencies & môi trường
+node_modules/
+.env
+*.log

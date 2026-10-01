@@ -1,0 +1,23 @@
+[
+  {
+    "testId": "BOOK_AUTH_TC_001",
+    "case": "để trống toàn bộ form",
+    "withValidName": false,
+    "form": {},
+    "expectedErrors": {
+      "name": "Name is required.",
+      "email": "Email is required.",
+      "password": "Password is required.",
+      "passwordConfirmation": "Password confirmation is required."
+    }
+  },
+  {
+    "testId": "BOOK_AUTH_TC_002",
+    "case": "email sai định dạng",
+    "withValidName": true,
+    "form": { "email": "abc" },
+    "expectedErrors": {
+      "email": "Invalid email address"
+    }
+  }
+]
