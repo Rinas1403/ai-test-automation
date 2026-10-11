@@ -4,7 +4,7 @@ import { setTestMeta } from '../../utils/report';
 import { TestData } from '../../utils/test-data';
 
 test.describe('API Book', () => {
-  test('Lấy danh sách sách có phân trang theo limit', {tag: ['@smoke', '@book', '@api', '@account', '@knownbug'] }, async ({ bookApi }) => {
+  test('Lấy danh sách sách có phân trang theo limit',{ tag: ['@smoke', '@book', '@api', '@account'] }, async ({ bookApi }) => {
     await setTestMeta({
       testId: 'BOOK_BOOK_TC_001',
       feature: 'Sách',
@@ -90,7 +90,7 @@ test.describe('API Book', () => {
     });
   });
 
-  test('Tạo, xem và xoá sách của chính mình', { tag: ['@smoke', '@book', '@api', '@account'] }, async ({ authedBookApi, authedCategoryApi, bookApi, cleanup }) => {
+  test('Tạo, xem và xoá sách của chính mình', { tag: ['@smoke', '@book', '@api', '@account', '@knownbug'] }, async ({ authedBookApi, authedCategoryApi, bookApi, cleanup }) => {
     await setTestMeta({
       testId: 'BOOK_BOOK_TC_005',
       feature: 'Sách',
