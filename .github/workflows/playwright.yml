@@ -1,23 +1,29 @@
-name: Playwright Tests
+name: Playwright UI + API Tests
 
 on:
   push:
     branches: [main]
   pull_request:
   workflow_dispatch:
+    inputs:
+      project:
+        description: 'Project cần chạy: all | ui | api | ui-chrome | ui-edge | ui-firefox'
+        required: false
+        default: all
 
 env:
-  # Số luồng song song — hạ xuống 2–3 nếu runner 2 vCPU chạy chập chờn.
-  # Sửa đúng dòng này, KHÔNG đụng playwright.config.ts
   WORKERS: 5
+  HEADLESS: 'true'
+  BASE_URL: ${{ vars.BASE_URL || 'https://book.anhtester.com' }}
+  API_BASE_URL: ${{ vars.API_BASE_URL || 'https://book.anhtester.com' }}
 
 jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-             defaults:
-           run:
-             working-directory: playwright-typescript-framework
+    defaults:
+      run:
+        working-directory: playwright-typescript-framework
     steps:
       - uses: actions/checkout@v4
 
@@ -27,21 +33,32 @@ jobs:
           cache: npm
           cache-dependency-path: playwright-typescript-framework/package-lock.json
 
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chrome msedge firefox
+
+      - name: Typecheck
+        run: npm run typecheck
 
       - name: Run tests
         env:
-          BASE_URL: ${{ secrets.BASE_URL }}
-          TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
-          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
-          HEADLESS: 'true'
-        run: npx playwright test
+          PROJECT: ${{ inputs.project }}
+        run: |
+          case "$PROJECT" in
+            ui)                          npm run test:ui ;;
+            api|ui-chrome|ui-edge|ui-firefox) npx playwright test --project="$PROJECT" ;;
+            *)                           npm test ;;
+          esac
 
       - name: Sinh Allure report
         if: always()
-        # CLI đã nằm trong devDependencies — CI không cài Allure riêng
-        run: npx allure generate reports/allure-results
+        run: |
+          npm run report:generate
+          npm run report:single
 
       - uses: actions/upload-artifact@v4
         if: always()
