@@ -4,7 +4,7 @@ import { setTestMeta } from '../../utils/report';
 import { TestData } from '../../utils/test-data';
 
 test.describe('API Book', () => {
-  test('Lấy danh sách sách có phân trang theo limit', { tag: ['@smoke', '@book', '@api'] }, async ({ bookApi }) => {
+  test('Lấy danh sách sách có phân trang theo limit', {tag: ['@smoke', '@book', '@api', '@account', '@knownbug'] }, async ({ bookApi }) => {
     await setTestMeta({
       testId: 'BOOK_BOOK_TC_001',
       feature: 'Sách',
