@@ -2,7 +2,7 @@
 
 👋 Chào mừng bạn đến với **Claude Testing Skills** phiên bản dành cho **Claude Code**!
 
-Đây là bộ Skills được xây dựng và phát triển bởi **Anh Tester**, dành riêng cho **Học viên học khoá AI tại Anh Tester**. Mục tiêu của repo này là cung cấp sẵn các thiết lập, quy tắc hành vi (Rules), kỹ năng (Skills), và lệnh tùy chỉnh (Commands) chuẩn để hỗ trợ sử dụng AI Agent trên phần mềm **Claude Code** (bao gồm Claude Code CLI và Claude Code Desktop hoặc Claude Code dạng Extention trên VS Code).
+
 
 Bộ Skills này **không chỉ dành riêng cho Automation** — mà được thiết kế toàn diện cho cả **Manual Testing** lẫn **Automation Testing**, bao phủ toàn bộ vòng đời kiểm thử phần mềm từ phân tích yêu cầu, thiết kế test cases cho đến thực thi và báo cáo kết quả.
 
@@ -188,7 +188,7 @@ Dành cho tác vụ **đơn lẻ**, chỉ cần copy → thay `[...]` bằng d�
    claude
    ```
 
-   Claude Code tự động nhận diện thư mục `.claude` và file `CLAUDE.md` ở thư mục gốc, áp dụng ngay các Rule, Skill, Command của **Anh Tester** đã thiết lập sẵn.
+   Claude Code tự động nhận diện thư mục `.claude` và file `CLAUDE.md` ở thư mục gốc, áp dụng ngay các Rule, Skill.
 
 4. **Sử dụng slash commands:**
    Gõ `/` trong Claude Code để xem danh sách commands có sẵn. Ví dụ:
@@ -231,22 +231,6 @@ Copy `.claude` vào dự án là AI đã có **Rule / Skill / Command**. Nhưng 
 
 ---
 
-## 🤝 Cộng đồng học tập
-
-- Tham gia cộng đồng **Anh Tester** để cùng trao đổi:
-  - 📘 **Fanpage Facebook:** [Anh Tester](https://www.facebook.com/anhtester)
-  - 👥 **Group Facebook Automation:** [Cộng đồng Automation Testing](https://www.facebook.com/groups/automationtest)
-  - 👥 **Group Facebook Manual:** [Cộng đồng Manual Testing](https://www.facebook.com/groups/manualtest)
-  - ✈️ **Telegram Automation:** [Cộng đồng Automation Testing](https://t.me/+kSUGJ3pVvxkyZWU1)
-  - ✈️ **Telegram Manual:** [Cộng đồng Manual Testing](https://t.me/+8eChRz7OVqliZWRl)
 
 ---
 
-## 📄 License
-
-Dự án này CÓ PHÍ, chỉ dành cho HỌC VIÊN chính thức của Anh Tester.
-
----
-
-Anh Tester Automation Testing 🎯  
-https://anhtester.com
