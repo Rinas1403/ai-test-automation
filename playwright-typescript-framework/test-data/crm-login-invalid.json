@@ -1,0 +1,50 @@
+{
+  "requiredFields": [
+    {
+      "variant": "a",
+      "case": "rỗng cả Email lẫn Password",
+      "smoke": true,
+      "email": "",
+      "password": "",
+      "expectedErrors": ["The Password field is required.", "The Email Address field is required."]
+    },
+    {
+      "variant": "b",
+      "case": "rỗng riêng Email",
+      "smoke": false,
+      "email": "",
+      "password": "Abc12345",
+      "expectedErrors": ["The Email Address field is required."]
+    },
+    {
+      "variant": "c",
+      "case": "rỗng riêng Password",
+      "smoke": false,
+      "email": "admin@example.com",
+      "password": "",
+      "expectedErrors": ["The Password field is required."]
+    },
+    {
+      "variant": "d",
+      "case": "toàn khoảng trắng ở cả hai ô",
+      "smoke": false,
+      "email": "   ",
+      "password": "   ",
+      "skipOn": {
+        "firefox": "Firefox coi Email toàn khoảng trắng là không hợp lệ và chặn form ngay tại trình duyệt (Chrome/Edge cho qua) — không tới được máy chủ để kiểm việc cắt khoảng trắng. TC chỉ định nền tảng Google Chrome"
+      },
+      "expectedErrors": ["The Password field is required.", "The Email Address field is required."]
+    }
+  ],
+  "invalidEmailFormats": [
+    { "variant": "a", "case": "thiếu @", "email": "abc" },
+    { "variant": "b", "case": "thiếu tên miền", "email": "abc@" },
+    { "variant": "c", "case": "thiếu phần trước @", "email": "@example.com" },
+    { "variant": "d", "case": "nhiều @", "email": "a@b@example.com" },
+    { "variant": "e", "case": "chuỗi tiêm SQL", "email": "admin@example.com' OR '1'='1" }
+  ],
+  "attackPasswords": [
+    { "variant": "a", "case": "XSS", "existingEmail": false, "password": "<script>alert(1)</script>" },
+    { "variant": "b", "case": "tiêm SQL", "existingEmail": true, "password": "' OR 1=1--" }
+  ]
+}

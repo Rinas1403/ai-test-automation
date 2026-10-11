@@ -1,0 +1,41 @@
+{
+  "name": "playwright-typescript-framework",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web UI + API automation framework cho AnhTester Book — Playwright TypeScript + Allure 2",
+  "scripts": {
+    "test": "node scripts/run-browsers.mjs api ui-chrome ui-edge ui-firefox",
+    "test:ui": "node scripts/run-browsers.mjs",
+    "test:chrome": "playwright test --project=ui-chrome",
+    "test:edge": "playwright test --project=ui-edge",
+    "test:firefox": "playwright test --project=ui-firefox",
+    "test:api": "playwright test --project=api",
+    "test:headed": "cross-env HEADLESS=false node scripts/run-browsers.mjs",
+    "test:visual": "playwright test --ui",
+    "test:debug": "cross-env HEADLESS=false playwright test --project=ui-chrome --debug",
+    "test:smoke": "node scripts/run-browsers.mjs api ui-chrome ui-edge ui-firefox --grep @smoke",
+    "test:account": "node scripts/run-browsers.mjs api ui-chrome ui-edge ui-firefox --grep @account",
+    "test:no-account": "node scripts/run-browsers.mjs api ui-chrome ui-edge ui-firefox --grep-invert @account",
+    "test:list": "playwright test --list",
+    "typecheck": "tsc --noEmit",
+    "report": "npm run report:generate && npm run report:open",
+    "report:generate": "allure generate reports/allure-results -o reports/allure-report --clean",
+    "report:open": "allure open reports/allure-report",
+    "report:single": "allure generate reports/allure-results -o reports/allure-report-single --single-file --clean",
+    "report:html": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^24.0.0",
+    "allure-commandline": "^2.46.1",
+    "allure-js-commons": "^3.13.0",
+    "allure-playwright": "^3.13.0",
+    "cross-env": "^10.0.0",
+    "dotenv": "^18.0.4",
+    "typescript": "^5.9.0",
+    "winston": "^3.19.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
