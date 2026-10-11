@@ -27,3 +27,17 @@ node_modules/
 Thumbs.db
 .vscode/
 .idea/
+
+# Cá nhân / công cụ AI — không đưa lên public
+.claude/
+CLAUDE.md
+.mcp.json
+memories/
+.playwright-mcp/
+playwright-mcp-config.json
+fix-ci-and-privacy.patch
+**/.claude/
+**/CLAUDE.md
+**/.mcp.json
+**/memories/
+**/.playwright-mcp/
