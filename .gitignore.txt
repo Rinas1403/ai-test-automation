@@ -1,9 +1,0 @@
-# Cá nhân / công cụ AI
-.claude/
-CLAUDE.md
-.mcp.json
-memories/
-**/.claude/
-**/CLAUDE.md
-**/.mcp.json
-**/memories/
