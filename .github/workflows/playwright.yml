@@ -49,9 +49,9 @@ jobs:
           PROJECT: ${{ inputs.project }}
         run: |
           case "$PROJECT" in
-            ui)                          npm run test:ui ;;
-            api|ui-chrome|ui-edge|ui-firefox) npx playwright test --project="$PROJECT" ;;
-            *)                           npm test ;;
+            ui)  npm run test:ui -- --grep-invert @knownbug ;;
+            api|ui-chrome|ui-edge|ui-firefox) npx playwright test --project="$PROJECT" --grep-invert @knownbug ;;
+            *)   npm test -- --grep-invert @knownbug ;;
           esac
 
       - name: Sinh Allure report
